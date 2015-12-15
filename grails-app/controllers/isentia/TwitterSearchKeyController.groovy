@@ -20,9 +20,9 @@ class TwitterSearchKeyController {
     def pingTwitterRestApi() {
         String searchTerm = params.searchTerm
         println ("pingTwitterRestApi:searchTerm  $searchTerm")
-        def res = twitterSearchService.search(searchTerm)
-        println ("The Resultant JSON" + res.toString(true));
-        render res
+        def result = twitterSearchService.search(searchTerm)
+        println ("The Resultant JSON" +( result as JSON).toString(true));
+        render result
     }
 
     def show(TwitterSearchKey twitterSearchKeyInstance) {

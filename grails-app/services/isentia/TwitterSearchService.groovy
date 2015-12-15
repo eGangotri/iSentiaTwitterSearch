@@ -15,11 +15,13 @@ class TwitterSearchService {
         TwitterSearchKey searchKey = TwitterSearchKey.findBySearchTerm(searchTerm, [])
         println("pingTwitterRestApi:searchKey $searchKey")
 
+        boolean resultAlreadyExists = false
         def result
         if (searchKey) {
             TwitterSearchWithResults searchWithResults = TwitterSearchWithResults.findBySearchKey(searchKey)
             if (searchWithResults) {
-                result = searchWithResults.searchResult
+                result = searchWithResults.searchResult as JSON
+                resultAlreadyExists = true
             } else {
                 result = pingTwitter(searchTerm)
             }
@@ -32,7 +34,6 @@ class TwitterSearchService {
             println ("done with saving: searchWithResults")
             if(searchWithResults){
                 println (searchWithResults.id)
-                println (searchWithResults.searchResult)
             }
         }
 

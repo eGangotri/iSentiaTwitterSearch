@@ -46,9 +46,9 @@
         </fieldset>
 
 
-        <p id="searchResults">
+        <div id="searchResults">
 
-        </p>
+        </div>
         <g:each in="${twitterSearchKeyInstanceList}" status="i" var="twitterSearchKeyInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 

@@ -9,21 +9,40 @@ function searchOnTwitter(url){
 
         },
         success: function(data) {
-            alert("success: " )
-            if(data && data.statuses){
-                alert("success: " + data.statuses)
-                var cnter = 0
-                for(cnter = 0 ; cntr = data.statuses.length; cntr++){
-                    console.log( data.statuses[cntr])
+           console.log("success: ")
+            var totalCount = data.statuses ? data.statuses.length : 0;
+
+            if( data.statuses){
+                console.log(data.statuses.length)
+
+                if( data.statuses[0] && data.statuses[0].text) {
+                    console.log(data.statuses[0].text)
+                }
+                if(data.statuses.length > 0){
+                    var cntr = 0
+                    var rows = "<br>"
+                    for(cntr = 0; cntr < totalCount; cntr++){
+
+                        if(data.statuses[cntr]){
+                            var row = (cntr+1) + "). " + data.statuses[cntr].text + "<br>";
+                            rows += row;
+                            console.log("row ->"  + row)
+                        }
+                    }
+                }
+
+                if(data.resultAlreadyExists){
+                    console.log("data.resultAlreadyExists ->"  + data.resultAlreadyExists);
+
                 }
             }
-            $("#searchResults").innerHTML="Results Out<br>" + JSON.stringify(data)
+            $("#searchResults").html("Search Over. <br>" + totalCount + " Rows Returned.<br>" + rows + ".");
         },
         error: function(request, status, error) {
-            alert("error: " +error)
+            console.log("error: " +error)
         },
         complete: function() {
-            alert("completed: ")
+            console.log("complete: ");
             return false;
         }
     });
